@@ -1,0 +1,13 @@
+
+安装方法 http://blog.csdn.net/yy3097/article/details/51063950
+变声(范围 140 - 60)
+ffmpeg -y -i D:/www_root/haohaodata/talent_music/24.mp3 -af asetrate=44100*140/100,atempo=100/140 D:/www_root/haohaodata/talent_music/24.mp3
+ffmpeg -i D:/www_root/haohaodata/talent_music/24.mp3 -y -filter:a "asetrate=44100*140/100,atempo=100/140" -vn D:/www_root/haohaodata/talent_music/24.mp3
+转变格式
+ffmpeg -i D:/www_root/haohaodata/talent_music/resultDir/310/ask/1.m4a -f mp3 D:/www_root/haohaodata/talent_music/resultDir/310/ask/1.mp3
+声音合成
+ffmpeg -i "concat:123.mp3|124.mp3" -acodec copy output.mp3
+
+ffmpeg -i D:/www_root/haohaodata/talent_music/15.mp3 -y -vn -ar 44100 -ac 1 -ab 128 -f mp3 D:/www_root/haohaodata/talent_music/15_2.mp3
+
+ffmpeg -i D:/www_root/haohaodata/talent_music/re_ffmpeg2/310_ffmpeg/53.mp3 -y -vn -ar 44100 -ac 1 -ab 128 -f mp3 D:/www_root/haohaodata/talent_music/re_ffmpeg_bak/310_ffmpeg/53.mp3

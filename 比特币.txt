@@ -1,0 +1,3 @@
+stratum+tcp://stratum.btcchina.com:3333
+xiongdebit.001
+123

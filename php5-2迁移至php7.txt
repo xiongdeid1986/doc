@@ -1,0 +1,171 @@
+Php5.2 直接升级到 php7
+------------------------------------------------------------------------------------------------------------------------------------------------------
+Php5.2-5.3
+使用sublime替换
+------------------------------------------------------------------------------------------------------------------------------------------------------
+call_user_method_array() (使用 call_user_func_array() 替代)
+call_user_method() (使用 call_user_func() 替代)
+define_syslog_variables()
+dl() 函数不能在 PHP-FPM 中使用了，它的功能做在了 CLI、嵌入到 SAPIs 中了。 => PHP7.0
+ereg_replace() (使用 preg_replace() 替代)
+eregi_replace() (使用 preg_replace() 配合 'i' 修正符替代)
+preg_replace() 函数中用到的 /e 修饰符现在被弃用。可以使用 preg_replace_callback() 函数来替代 => PHP5.5 需要逐一修改函数
+eregi() (使用 preg_match() 配合 'i' 修正符替代)
+ereg() (使用 preg_match() 替代)
+set_magic_quotes_runtime() 以及它的别名函数 magic_quotes_runtime()
+session_register() (使用 $_SESSION 超全部变量替代)
+session_unregister() (使用 $_SESSION 超全部变量替代)
+session_is_registered() (使用 $_SESSION 超全部变量替代)
+set_socket_blocking() (使用 stream_set_blocking() 替代)
+sql_regcase()
+
+使用Hbuilder替换
+------------------------------------------------------------------------------------------------------------------------------------------------------
+spliti() (使用 preg_split() 配合 'i' 修正符替代)
+split() (使用 preg_split() 替代)
+
+mysql_* 数据函数升级 mysqli_*
+------------------------------------------------------------------------------------------------------------------------------------------------------
+
+以下需要有数据连接传参
+mysqli_error("DBlink"); (老 mysql_error() )
+mysqli_errno("DBlink");
+
+新 mysqli_query($Dblink,$sql); 老 mysql_query($sql); //第一参数数据库连接，第二参数为语句
+新 mysqli_connect($host,$user,$password,$dbname);//有数据库名字 老 mysql_connect($dblocalhost,$add['dbusername'],$add['dbpassword']);
+新 mysqli_select_db($link,$dbname) 老 mysql_select_db($dbname,$link) //新的连接在前,数据库名在后. 老的相反。
+mysql_pconnect 同上  mysqli_connect 需要处理
+新 mysqli_result($str,0) 老 mysql_result($str) //新的需要指定行号0
+
+新 mysqli_insert_id($link) 老 mysql_insert_id() 必须使用LINK连接
+新 mysqli_real_escape_string($link,$str) 老 mysql_real_escape_string($str) 转义字符串，老版本不需要连接标识
+新 addslashes() 老 mysql_escape_string 转义字符串  具体用法 if(!get_magic_quotes_gpc()){/*值为1，表示开启。那么 php会自动为POST、GET、COOKIE传过来的参数值自动增加转义字符“\”，来确保这些数据的安全性。尤其是防止SQL注入。值为0，表示关闭。php解析器不会自动为POST、GET、COOKIE传过来的参数值加转义字符“\”，那么这时就用addslashes函数来转义参数了。*/addslashes($str);}
+新 mysqli_get_server_info($link) 老 mysql_get_server_info() 返回服务器信息，老版本不需要标识
+mysql_get_host_info 同上
+mysql_get_client_info 同上
+mysql_get_proto_info 同上
+mysqli_get* 同上
+
+新 mysqli_multi_query($Dblink,$sql) 老 mysql_unbuffered_query($sql,$Dblink) 前者为MYSQL无返回结果查询,后者为多条查询  LINK和SQL相反
+MYSQL_ MYSQLI_ 大写的查询参数需要替换
+
+mysql_list_dbs 没有相关的mysqli替换 用查询语句代替 如$a=mysql_list_dbs($LINK)；替换$a=mysqli_query($LINK,"show databases");
+mysql_fetch_assoc 没有相关的mysqli替换 取出关联数组 如username => admin ,password => admin888。用foreach模拟实现 代码 		
+																														$a=array();
+																														foreach ($this->result as $k => $v) {
+																															$a[$k]=$v;
+																														}
+																														return $a; 
+------------------------------------------------------------------------------------------------------------------------------------------------------
+mysql_db_query() (使用 mysql_select_db() 和 mysql_query() 替代)
+废弃以字符串传递区域设置名称. 使用 LC_* 系列常量替代.
+mktime()、gmmktime() 函数的$is_dst 参数被移除了 mktime(hour,minute,second,month,day,year,is_dst); 具体为  : 第7个参数
+
+
+注意事项
+下面是被弃用的 PHP.INI 指令列表. 使用下面任何指令都将导致 E_DEPRECATED 错误.
+------------------------------------------------------------------------------------------------------------------------------------------------------
+define_syslog_variables
+register_globals
+register_long_arrays
+safe_mode
+magic_quotes_gpc
+magic_quotes_runtime
+magic_quotes_sybase
+弃用 INI 文件中以 '#' 开头的注释.
+
+
+Php5.3-5.4
+过时的函数
+------------------------------------------------------------------------------------------------------------------------------------------------------
+mcrypt_generic_end()
+mysql_list_dbs()
+
+用@屏蔽掉有关PHP.INI的下列设置
+register_globals 
+register_long_arrays 如get_cfg_var('register_globals')
+
+break 和 continue 不再接受可变参数
+break 2 = 正确。break $a = 错误。
+
+5.4移除函数(如果是从5.2升级,一般不必理会.因为5.2不调用这些函数)
+define_syslog_variables()
+import_request_variables()
+session_is_registered() 、 session_register() 以及 session_unregister() 。
+别名 mysqli_bind_param() 、 mysqli_bind_result() 、 mysqli_client_encoding() 、 mysqli_fetch() 、 mysqli_param_count() 、
+ mysqli_get_metadata() 、 mysqli_send_long_data() 、 mysqli::client_encoding() 以及 mysqli_stmt::stmt() 。
+ 
+ 
+Php5.4-5.5
+------------------------------------------------------------------------------------------------------------------------------------------------------
+移除的函数(不必理会)
+php_logo_guid()
+php_egg_logo_guid()
+php_real_logo_guid()
+zend_logo_guid()
+
+mcrypt_cbc()
+mcrypt_cfb()
+mcrypt_ecb()
+mcrypt_ofb()
+
+
+Php5.5-5.6
+------------------------------------------------------------------------------------------------------------------------------------------------------
+htmlentities()， html_entity_decode() htmlspecialchars() 生成的默认字符集为utf-8
+
+func_get_args() 获取函数参数为数组  将使用... 来运算
+function($a,$b,...$params){
+	//func_get_args();
+	//$params 将从没有被定义的第3个参数开始
+	结果为
+	$params[0]=$a;
+	$params[1]=$b;
+	//$params[2-N] 从 $param开始;
+}
+$HTTP_RAW_POST_DATA 被移除
+$HTTP_RAW_POST_DATA 不再被支持。 可以使用 "php://input" => PHP7.0
+always_populate_raw_post_data 请使用 "php://input" 
+
+Php5.6-7.0
+------------------------------------------------------------------------------------------------------------------------------------------------------
+list() 不会翻转数组 函数参数不再允许为空 函数不再支持拆解字符串
+
+被移除的函数
+------------------------------------------------------------------------------------------------------------------------------------------------------
+call_user_method() 与 call_user_method_array() 被删除
+mcrypt_generic_end() 被删除，建议使用 mcrypt_generic_deinit() 
+mcrypt_ecb() mcrypt_cbc() mcrypt_cfb() 和 mcrypt_ofb() 功能，建议使用目前还支持的 mcrypt_decrypt() 与适当的 MCRYPT_MODE_* 常量。
+mcrypt_encrypt() 使用 
+datefmt_set_timezone_id() 与 IntlDateFormatter::setTimeZoneID() 被删除，建议使用 datefmt_set_timezone() 与IntlDateFormatter::setTimeZone() 。
+set_magic_quotes_runtime() 与它的别名函数 magic_quotes_runtime() 被删除。他们在 PHP5.3.0 中就被标记被过时的。
+set_socket_blocking() 已被移除，建议使用 stream_set_blocking()。PostScript Type1 字体的支持已经从 GD 扩展删除，涉及的函数有：
+------------------------------------------------------------------------------------------------------------------------------------------------------
+PostScript Type1 字体的支持已经从 GD 扩展删除，涉及的函数有：
+imagepsbbox()
+imagepsencodefont()
+imagepsextendfont()
+imagepsfreefont()
+imagepsloadfont()
+imagepsslantfont()
+imagepstext() 建议使用 TrueType 字体和其相关的功能代替。
+------------------------------------------------------------------------------------------------------------------------------------------------------
+下面的INI指令以及相关的功能被删除：
+asp_tags ASP标记
+
+注意事项
+------------------------------------------------------------------------------------------------------------------------------------------------------
+函数不能使用变量，必须是字符名。如$a->this($b); => $a=(STRING)$a;$a->this($b);//先转为字符再调用
+类中的函数不可以和类名同名，会发出一个 E_DEPRECATED 错误。
+构造函数（__construct）不存在时，会产生一个 E_DEPRECATED 错误。
+
+新功能
+------------------------------------------------------------------------------------------------------------------------------------------------------
+三元运算精减为 ??
+太空船运算 <=> "a"<=>"b" -1(将前面的值比较后面的值,结果为-1、0、1)
+define() 可以定义常量数组
+
+程序BUG
+------------------------------------------------------------------------------------------------------------------------------------------------------
+废除了php中的”=&”符号
+= & new 替换为 = new
