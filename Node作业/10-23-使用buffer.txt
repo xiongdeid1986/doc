@@ -1,0 +1,4 @@
+10进制数字转2,8,16进制
+2,8,16进制转10进制
+新建buffer 使用string_decoder
+buffer使用编码
