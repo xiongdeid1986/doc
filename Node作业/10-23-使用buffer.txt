@@ -2,3 +2,7 @@
 2,8,16进制转10进制
 新建buffer 使用string_decoder
 buffer使用编码
+buffer复制
+buffer长度
+buffer其他静态属性
+buffer
