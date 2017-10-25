@@ -1,7 +1,17 @@
-订阅事件
-数组apply call bind(功能)
-给文件绑定事件
-添加事件 监听事件
-写一个单次监听函数(移除事件)
-发射事件
-使用ulit继承事件
+//订阅事件
+//数组apply call bind(功能)
+//给文件绑定事件
+//添加事件 监听事件
+//写一个单次监听函数(移除事件)
+//发射事件
+//使用ulit继承事件
+const EventEmitter = require("events").EventEmitter;
+const fs = require("fs")
+var event = new EventEmitter();
+event.on("message",function(msg){
+	console.log(msg)
+})
+
+setInterval(function(){
+	event.emit("message","监听成功")
+},1000);
