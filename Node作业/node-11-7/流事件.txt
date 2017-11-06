@@ -1,0 +1,11 @@
+流读取文件, {开始,结束},并监听 on data,end
+[option] highWaterMark 设置编码.
+流的暂停pause 恢复 resume
+readable 监听 , test.read(1/*读取一个字节*/)
+fs 写入流 监听写入,结束.
+写入流属性 bytesWriten属性
+写入流 : end 迫使缓存区的数据立即写入文件,调用后不可再写入.
+pipe 先写,如果写入慢.则关闭写入缓存区,等写入继续写.
+写入流drain 事件. 
+setEncoding("utf-8");
+
