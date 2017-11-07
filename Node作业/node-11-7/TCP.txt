@@ -1,0 +1,6 @@
+1.require("net"); 双工流 allowHalfOpen 是否允许半开连接
+创建一个双工流,监听端口(端口,回调),使用XFTP或tenet连接.
+创建的双工流可以使用可读写流的函数. pipe等.resume() , pause()暂停 等.....
+util 解析地址.util.inspect(socket.address()); remoteAddress 客户端IP
+socket超时 .setTimeout();监听超时事件 socket.on("timeout",fn)
+写一个tcpClient
