@@ -52,8 +52,10 @@ MYSQL_ MYSQLI_ 大写的查询参数需要替换
 mysql_list_dbs 没有相关的mysqli替换 用查询语句代替 如$a=mysql_list_dbs($LINK)；替换$a=mysqli_query($LINK,"show databases");
 mysql_fetch_assoc 没有相关的mysqli替换 取出关联数组 如username => admin ,password => admin888。用foreach模拟实现 代码 		
 																														$a=array();
-																														foreach ($this->result as $k => $v) {
-																															$a[$k]=$v;
+全局数据连接
+$whmcsmysql
+$GLOBALS['whmcsmysql']
+$a[$k]=$v;
 																														}
 																														return $a; 
 ------------------------------------------------------------------------------------------------------------------------------------------------------
