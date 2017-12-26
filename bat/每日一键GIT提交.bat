@@ -1,3 +1,2 @@
 D:
-cd D:\workroom\doc\bat\
-python Automatic.submission.Git.py
+python D:\workroom\doc\bat\Automatic.submission.Git.py

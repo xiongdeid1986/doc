@@ -1,5 +1,6 @@
 import os
 base_path = 'D:/workroom/'
+#需要提交的文件数组.
 gits = ['doc','study','ajaxxy','da_skin','workroom_paltform']
 for file in gits:# 循环需要GIT的文件
 	tmp_base_path = base_path+file
