@@ -1,28 +1,46 @@
 import os
-base_path = 'D:/workroom/'
-#需要提交的文件数组.
-gits = ['doc','study','ajaxxy','da_skin','workroom_paltform']
-for file in gits:# 循环需要GIT的文件
-	tmp_base_path = base_path+file
-	GitAutoPush = tmp_base_path+"/GitAutoPush.bat"
-	fp=open(GitAutoPush,'w')
-	git_text = "D:\ncd "+os.path.normcase(tmp_base_path)+"\ngit add -A\ngit commit -m \"%date:~0,10%\"\ngit push"
-	fp.write(git_text)
-	fp.close()
-	if os.access(GitAutoPush,os.F_OK):
-		print(file+' Can be submitted automatically')
-	else:
-		print(file+' Can not be submitted automatically')
-		fp = open(tmp_base_path+"/.gitignore",'a')
-		fp.write('\r\n/GitAutoPush.bat')
-		fp.close()
-		#给最终执行文件增加
-		fp = open("D:/workroom/每日一键GIT提交.bat",'a')
-		text = os.path.normcase(GitAutoPush)
-		fp.write(text+"\r\n")
-		fp.close()
-for file in gits:# git提交
-	GitAutoPush = tmp_base_path+"/GitAutoPush.bat"
-	print(GitAutoPush)
-	os.system(GitAutoPush) 
-print("Run successfully")
+import json
+import datetime
+#执行bat文件的路径
+autoBat = "D:\\workroom\\doc\\bat\\每日一键GIT提交.bat"
+#需要git提交的项目
+Projects = {\
+	"ajaxxy":{\
+		"path":"D:\\workroom\\ajaxxy\\",\
+		"remote":""\
+	},
+	"doc":{\
+		"path":"D:\\workroom\\doc\\",\
+		"remote":""\
+	},
+	"da_skin":{\
+		"path":"D:\\workroom\\da_skin\\",\
+		"remote":""\
+	},
+	"study":{\
+		"path":"D:\\workroom\\study\\",\
+		"remote":""\
+	},
+	"workroom_paltform":{\
+		"path":"D:\\workroom\\workroom_paltform\\",\
+		"remote":""\
+	},
+	"ddweb":{\
+		"path":"D:\\www_root\\api.ddweb.com.cn\\",\
+		"remote":""\
+	}
+}
+cmd = ""
+for j in Projects:
+	_j = Projects[j]
+	path = _j["path"]
+	remote = _j["remote"]
+	disk = path[0:2]
+	cmd += disk+"\n"+"cd "+os.path.normcase(path)+"\ngit add -A\ngit commit -m \"%date:~0,10%\"\ngit push\n"
+	print(disk)
+	print(path)
+	print(remote)
+fs = open(autoBat,'w')
+fs.write(cmd)
+fs.close()
+print(cmd)
