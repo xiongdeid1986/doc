@@ -58,7 +58,8 @@ for j in Projects:
 	data_dump_cmd = ""
 	if(_j["data_base_name"]):
 		data_dump_cmd = "mysqldump -u"+_j["data_base_user"]+" -p"+_j["data_base_pwd"]+" "+_j["data_base_name"]+" > MysqlSql.sql\n"
-	cmd += disk+"\n"+"cd "+os.path.normcase(path)+"\n"+data_dump_cmd+"git add -A\ngit commit -m \"%date:~0,10%%time:~0,8%\"\ngit push\n"
+	if(os.path.exists(path)):
+		cmd += disk+"\n"+"cd "+os.path.normcase(path)+"\n"+data_dump_cmd+"git add -A\ngit commit -m \"%date:~0,10%%time:~0,8%\"\ngit push\n"
 	print(j+' create successer!')
 fs = open(autoBat,'w')
 fs.write(cmd)
