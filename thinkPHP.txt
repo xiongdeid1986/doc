@@ -2,9 +2,9 @@
 U();//生成URL
 E();error报错
 L();langage语言
- 
- 
- '__ROOT__'      =>  __ROOT__,       // 当前网站地址
+
+
+'__ROOT__'      =>  __ROOT__,       // 当前网站地址
 '__APP__'       =>  __APP__,        // 当前应用地址
 '__MODULE__'    =>  __MODULE__, //当前组
 '__ACTION__'    =>  __ACTION__,     // 当前操作地址
@@ -14,19 +14,18 @@ L();langage语言
 '__PUBLIC__'    =>  __ROOT__.'/Public',// 站点公共目录
 
 
-	 	'functionName':false,/*提交完毕后是否执行一个函数 ,填字符串, 调用时以window[functionName]()的形式调用*/
-	 	'callback':false,/*是否回调函数,以function(){}的格式传入*/
-	 	'unique':[],/*必须校验的input,即input不能为空值*/
-	 	'abandon':false,/*是否跳过所有的表单验证*/
-	 	'alert':true,/*是否显示返回的警告信息*/
-	 	'alertStyle':'info',/*显示的警告信息的样式 warning | success | dismissable | danger*/
-		'alertTo':'default',/*警告内容的显示元素 #xxx | .xxx 字符串,由JQUERY 获取*/
-		'alertLocation':'before',/*显示在元素的位置 before | after | self(内部)*/
-		'alertMax':5,//警告最多显示
-	 	'debug':false,
-		'callbackScroll':true,/*执行完回调函数后scroll是否运动*/
-		'scrollTop':'0px',/*scroll运动到那个px*/
-		'confirm':false/*提交时是否二次确认*/
-		/*form:表单的值 如$('#from')*/
-		
-		SaveRadio(nameName,v);//保存radio的值
+'functionName':false,/*提交完毕后是否执行一个函数 ,填字符串, 调用时以window[functionName]()的形式调用*/
+'callback':false,/*是否回调函数,以function(){}的格式传入*/
+'unique':[],/*必须校验的input,即input不能为空值*/
+'abandon':false,/*是否跳过所有的表单验证*/
+'alert':true,/*是否显示返回的警告信息*/
+'alertStyle':'info',/*显示的警告信息的样式 warning | success | dismissable | danger*/
+'alertTo':'default',/*警告内容的显示元素 #xxx | .xxx 字符串,由JQUERY 获取*/
+'alertLocation':'before',/*显示在元素的位置 before | after | self(内部)*/
+'alertMax':5,//警告最多显示
+'debug':false,
+'callbackScroll':true,/*执行完回调函数后scroll是否运动*/
+'scrollTop':'0px',/*scroll运动到那个px*/
+'confirm':false/*提交时是否二次确认*/
+/*form:表单的值 如$('#from')*/
+SaveRadio(nameName,v);//保存radio的值
